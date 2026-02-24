@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .venv/
 claims_session_log.json
+src/*.pdf
