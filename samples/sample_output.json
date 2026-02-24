@@ -1,0 +1,125 @@
+{
+  "tool_calls": [
+    {
+      "tool": "extract_document",
+      "args_keys": [
+        "source",
+        "source_type"
+      ]
+    },
+    {
+      "tool": "check_completeness",
+      "args_keys": [
+        "entities",
+        "issues"
+      ]
+    },
+    {
+      "tool": "assess_medical_risk",
+      "args_keys": [
+        "entities"
+      ]
+    },
+    {
+      "tool": "make_decision",
+      "args_keys": [
+        "completeness",
+        "medical_risk",
+        "issues",
+        "entities"
+      ]
+    }
+  ],
+  "tool_results": {
+    "extract_document": {
+      "summary_bullets": [
+        "Patient Jane Doe evaluated for chest pain and shortness of breath.",
+        "Stable angina documented as diagnosis.",
+        "ECG and troponin findings reported without acute ischemia."
+      ],
+      "entities": {
+        "patient_name": "Jane Doe",
+        "dob": "1978-04-12",
+        "report_date": "2024-11-02",
+        "provider_name": "Dr Amit Sharma, Cardiologist",
+        "diagnoses": [
+          {
+            "name": "Stable angina",
+            "icd10": null
+          }
+        ],
+        "medications": [
+          {
+            "name": "Aspirin",
+            "dose": "100mg",
+            "frequency": "daily"
+          }
+        ],
+        "procedures": [
+          "Stress echocardiogram"
+        ],
+        "key_dates": [
+          "2024-10-29",
+          "2024-11-02",
+          "2024-11-10"
+        ]
+      },
+      "issues": {
+        "missing_fields": [],
+        "missing_numerical_values": [],
+        "data_quality_flags": [
+          "relative_date_present"
+        ],
+        "confidence_notes": []
+      }
+    },
+    "check_completeness": {
+      "mandatory_present": [
+        "Patient full name",
+        "Date of birth",
+        "Report / examination date",
+        "Treating provider or clinic name"
+      ],
+      "mandatory_missing": [],
+      "preferred_present": [
+        "At least one diagnosis",
+        "Medication list (if applicable)"
+      ],
+      "preferred_missing": [],
+      "quality_flags": [
+        "relative_date_present"
+      ],
+      "completeness_score": 100,
+      "ready_for_decision": true
+    },
+    "assess_medical_risk": {
+      "risk_level": "moderate",
+      "risk_flags": [
+        "Moderate-risk diagnosis keyword: 'angina'"
+      ],
+      "flag_count": 1
+    },
+    "make_decision": {
+      "decision": "REFER_UNDERWRITER",
+      "confidence": "medium",
+      "rationale": "Moderate cardiovascular findings warrant underwriting review.",
+      "action_items": [
+        "Forward report and extracted summary to underwriter."
+      ],
+      "documents_requested": [],
+      "underwriter_notes": "Stable angina diagnosis and active therapy present."
+    }
+  },
+  "final_decision": {
+    "decision": "REFER_UNDERWRITER",
+    "confidence": "medium",
+    "rationale": "Moderate cardiovascular findings warrant underwriting review.",
+    "action_items": [
+      "Forward report and extracted summary to underwriter."
+    ],
+    "documents_requested": [],
+    "underwriter_notes": "Stable angina diagnosis and active therapy present."
+  },
+  "agent_summary": "Claim assessed with complete core fields and flagged cardiovascular risk."
+}
+

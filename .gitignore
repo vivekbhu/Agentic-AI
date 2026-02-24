@@ -1,0 +1,5 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+claims_session_log.json
